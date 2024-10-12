@@ -13,12 +13,12 @@
         include "OrangInggris.php";
         include "Mahasiswa.php";
 
-        $herwanda = new OrangBiasa('Herwanda');
-        $herwanda->ucapSalam();
+        $aza = new OrangBiasa('Herwanda');
+        $aza->ucapSalam();
         echo "<br>";
 
-        $julia = new OrangInggris('Julia');
-        $julia->ucapSalam(); //override
+        $mas = new OrangInggris('Julia');
+        $mas->ucapSalam(); //override
         echo "<br>";
 
         $julia = new Mahasiswa('Julia');
