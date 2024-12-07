@@ -23,4 +23,12 @@ public function getKolomTabel(){
     return $kolom_tabel;
 }
 
+// database: perpustakaan
+// table: buku
+//           id int (11) primary key auto_increment,
+//           judul varchar (150),
+//           pengarang varchar (150)
+//           penerbit varchar (150)
+//           tahun int (5)
+
 }
