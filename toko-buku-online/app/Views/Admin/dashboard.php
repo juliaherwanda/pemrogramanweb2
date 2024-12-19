@@ -1,85 +1,46 @@
-<?php
-include 'koneksi.php';
+<?= $this->extend('admin/layout'); ?>
 
-// Menangani penambahan data
-if (isset($_POST['tambah'])) {
-    $nama = $_POST['nama'];
-    $jumlah = $_POST['jumlah'];
-    $tanggal = $_POST['tanggal'];
-
-    $sql = "INSERT INTO transaksi (nama, jumlah, tanggal) VALUES ('$nama', $jumlah, '$tanggal')";
-    $conn->query($sql);
-}
-
-// Menangani pengeditan data
-if (isset($_POST['edit'])) {
-    $id = $_POST['id'];
-    $nama = $_POST['nama'];
-    $jumlah = $_POST['jumlah'];
-    $tanggal = $_POST['tanggal'];
-
-    $sql = "UPDATE transaksi SET nama='$nama', jumlah=$jumlah, tanggal='$tanggal' WHERE id=$id";
-    $conn->query($sql);
-}
-
-// Menangani penghapusan data
-if (isset($_GET['delete'])) {
-    $id = $_GET['delete'];
-    $sql = "DELETE FROM transaksi WHERE id=$id";
-    $conn->query($sql);
-}
-
-// Mengambil data transaksi
-$sql = "SELECT * FROM transaksi";
-$result = $conn->query($sql);
-?>
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <title>Dashboard Transaksi</title>
-</head>
-<body>
-<div class="container mt-5">
-    <h1>Dashboard Transaksi</h1>
-
-    <!-- Form Tambah Data -->
-    <form method="POST" class="mb-4">
-        <input type="text" name="nama" placeholder="Nama" required>
-        <input type="number" name="jumlah" placeholder="Jumlah" required>
-        <input type="date" name="tanggal" required>
-        <button type="submit" name="tambah" class="btn btn-primary">Tambah</button>
-    </form>
-
-    <!-- Tabel Data Transaksi -->
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nama</th>
-                <th>Jumlah</th>
-                <th>Tanggal</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while ($row = $result->fetch_assoc()): ?>
-                <tr>
-                    <td><?php echo $row['id']; ?></td>
-                    <td><?php echo $row['nama']; ?></td>
-                    <td><?php echo $row['jumlah']; ?></td>
-                    <td><?php echo $row['tanggal']; ?></td>
-                    <td>
-                        <a href="edit.php?id=<?php echo $row['id']; ?>" class="btn btn-warning">Edit</a>
-                        <a href="?delete=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</a>
-                    </td>
-                </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
+<?= $this->section('mainadmin'); ?>
+<!-- Title Section -->
+<div class="section">
+    <h1 class="mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" fill="currentColor" class="bi bi-mortarboard" viewBox="0 0 16 16">
+            <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917zM8 8.46 1.758 5.965 8 3.052l6.242 2.913z" />
+            <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46z" />
+        </svg>
+        Selamat Datang Di Toko Buku Online
+    </h1>
 </div>
-</body>
-</html>
+
+<!-- Total Transaction Section -->
+<div class="section">
+    <div class="card bg-light">
+        <div class="card-body">
+            <h5 class="card-title">TOTAL TRANSAKSI</h5>
+            <p class="card-text">150 Transaksi</p>
+            <td>
+                <button class="btn btn-sm btn-primary">Update</button>
+            </td>
+            <td>
+                <button class="btn btn-sm btn-danger">Hapus</button>
+            </td>
+        </div>
+    </div>
+</div>
+
+<!-- Revenue Section -->
+<div class="section">
+    <div class="card bg-light">
+        <div class="card-body">
+            <h5 class="card-title">JUMLAH PENDAPATAN</h5>
+            <p class="card-text">Rp. 12.000.000</p>
+            <td>
+                <button class="btn btn-sm btn-primary">Update</button>
+            </td>
+            <td>
+                <button class="btn btn-sm btn-danger">Hapus</button>
+            </td>
+        </div>
+    </div>
+</div>
+<?= $this->endSection() ?>

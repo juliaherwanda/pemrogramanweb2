@@ -9,7 +9,23 @@ class Home extends BaseController
         return view('home');
     }
 
-    public function chart(){
+    public function chart()
+    {
         return view('chart');
+    }
+
+    public function checkout()
+    {
+        return view('checkout');
+    }
+
+    public function submit()
+    {
+        return view('submit');
+    }
+
+    public function images($file)
+    {
+        return $this->response->download(WRITEPATH . 'uploads/images/' . $file, null);
     }
 }
